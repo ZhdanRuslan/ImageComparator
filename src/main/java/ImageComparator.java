@@ -1,6 +1,5 @@
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class ImageComparator {
