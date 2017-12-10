@@ -1,3 +1,8 @@
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 public class ImageComparator {
 
     /**
@@ -16,4 +21,23 @@ public class ImageComparator {
         return difference > 10;
     }
 
+    /**
+     * Method for storing all different pixels
+     * @param image1 the first image
+     * @param image2 the second image
+     * @return list of different pixels
+     * */
+    private List<Integer[]> getDifferentPixels(BufferedImage image1, BufferedImage image2) {
+
+        List<Integer[]> diffPix = new ArrayList();
+
+        for (int i = 0; i < image2.getWidth(); i++) {
+            for (int j = 0; j < image2.getHeight(); j++) {
+                if (pixelsDifference(image1.getRGB(i, j), image2.getRGB(i, j))) {
+                    diffPix.add(new Integer[]{i, j});
+                }
+            }
+        }
+        return diffPix;
+    }
 }
