@@ -26,6 +26,7 @@ public class ImageComparator {
     * Method which compare two pixels
     * @param firstPixel - first pixel
     * @param secondPixel - second pixel
+     * @see /stackoverflow.com/questions/2615522/java-bufferedimage-getting-red-green-and-blue-individually
      * */
     private boolean pixelsDifference(int firstPixel, int secondPixel) {
         int r1 = (firstPixel >> 16) & 255;
