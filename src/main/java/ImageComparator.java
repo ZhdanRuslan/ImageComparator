@@ -8,6 +8,21 @@ import java.util.List;
 public class ImageComparator {
 
     /**
+     * Getting result image with mark differences
+     * @param img1 - first image to compare
+     * @param img2 - second image to compare
+     * @return - result image with mark differences
+     * */
+    public BufferedImage getResultImage(BufferedImage img1, BufferedImage img2) throws IOException {
+        if ((img1.getWidth() != img2.getWidth()) || img1.getHeight() != img2.getHeight()) {
+            System.out.println("Wrong comparison. Images have different dimensions!");
+            return null;
+        }
+        BufferedImage different = new BufferedImage(img2.getColorModel(), img2.getRaster(), img2.isAlphaPremultiplied(), null);
+        return drawRedRectangle(different, groupPixels(getDifferentPixels(img1, img2)));
+    }
+
+    /**
     * Method which compare two pixels
     * @param firstPixel - first pixel
     * @param secondPixel - second pixel
@@ -65,15 +80,12 @@ public class ImageComparator {
                 if (integers[0] < minX) {
                     minX = integers[0];
                 }
-
                 if (integers[1] < minY) {
                     minY = integers[1];
                 }
-
                 if (integers[0] > maxX) {
                     maxX = integers[0];
                 }
-
                 if (integers[1] > maxY) {
                     maxY = integers[1];
                 }
