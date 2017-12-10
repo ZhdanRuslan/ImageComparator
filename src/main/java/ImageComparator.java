@@ -1,5 +1,8 @@
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ImageComparator {
@@ -38,5 +41,48 @@ public class ImageComparator {
             }
         }
         return diffPix;
+    }
+
+    /**Draw red rectangle which show differences on the picture
+     * @parem differentImage
+     * @param groupsOfPixels
+     * @return image with marks of differences*/
+
+    private BufferedImage drawRedRectangle(BufferedImage differentImage, List<List<Integer[]>> groupsOfPixels) throws IOException {
+
+        BufferedImage bufferedImage = new BufferedImage(differentImage.getColorModel(), differentImage.getRaster(), differentImage.isAlphaPremultiplied(), null);
+
+        Graphics2D graphics2D = (Graphics2D) bufferedImage.getGraphics();
+
+        for (Collection<Integer[]> group : groupsOfPixels) {
+            int minX = Integer.MAX_VALUE;
+            int minY = Integer.MAX_VALUE;
+            int maxX = Integer.MIN_VALUE;
+            int maxY = Integer.MIN_VALUE;
+
+            for (Integer[] integers : group) {
+
+                if (integers[0] < minX) {
+                    minX = integers[0];
+                }
+
+                if (integers[1] < minY) {
+                    minY = integers[1];
+                }
+
+                if (integers[0] > maxX) {
+                    maxX = integers[0];
+                }
+
+                if (integers[1] > maxY) {
+                    maxY = integers[1];
+                }
+            }
+            int width = maxX - minX;
+            int height = maxY - minY;
+            graphics2D.setColor(Color.red);
+            graphics2D.drawRect(minX, minY, width, height);
+        }
+        return bufferedImage;
     }
 }
