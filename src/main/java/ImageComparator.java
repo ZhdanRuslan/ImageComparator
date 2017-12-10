@@ -85,4 +85,25 @@ public class ImageComparator {
         }
         return bufferedImage;
     }
+
+    /**Group pixels. Pixels divide in 2 group
+     * the 2nd group begin from value 250
+     * @param diffpixels - list of different pixels*/
+    private List<List<Integer[]>> groupPixels(List<Integer[]> diffpixels) {
+
+        List<List<Integer[]>> groups = new ArrayList();
+        List<Integer[]> groupOne = new ArrayList();
+        List<Integer[]> groupTwo = new ArrayList();
+
+        for (Integer[] coordinates : diffpixels) {
+            if ((coordinates[1] > 0) && (coordinates[0] < 250)) {
+                groupOne.add(coordinates);
+            } else if (coordinates[0] > 250) {
+                groupTwo.add(coordinates);
+            }
+        }
+        groups.add(groupOne);
+        groups.add(groupTwo);
+        return groups;
+    }
 }
