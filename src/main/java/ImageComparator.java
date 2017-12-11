@@ -29,13 +29,13 @@ public class ImageComparator {
      * @see /stackoverflow.com/questions/2615522/java-bufferedimage-getting-red-green-and-blue-individually
      * */
     private boolean pixelsDifference(int firstPixel, int secondPixel) {
-        int r1 = (firstPixel >> 16) & 255;
-        int g1 = (firstPixel >> 8) & 255;
-        int b1 = (firstPixel) & 255;
-        int r2 = (secondPixel >> 16) & 255;
-        int g2 = (secondPixel >> 8) & 255;
-        int b2 = (secondPixel) & 255;
-        int difference = (Math.abs(r1 - r2) + Math.abs(g1 - g2) + Math.abs(b1 - b2)) / 3 * 100;
+        int red1 = (firstPixel >> 16) & 255; //0xFF
+        int green1 = (firstPixel >> 8) & 255; //0xFF
+        int blue1 = (firstPixel) & 255; //0xFF
+        int red2 = (secondPixel >> 16) & 255; //0xFF
+        int green2 = (secondPixel >> 8) & 255; //0xFF
+        int blue2 = (secondPixel) & 255; //0xFF
+        int difference = (Math.abs(red1 - red2) + Math.abs(green1 - green2) + Math.abs(blue1 - blue2)) / 3 * 100;
         return difference > 10;
     }
 
